@@ -24,6 +24,7 @@ class CallbackUrlTest < StrategyTestCase
     url_base = "http://auth.request.com"
     @request.stubs(:url).returns("#{url_base}/some/page")
     strategy.stubs(:script_name).returns("") # as not to depend on Rack env
+    strategy.stubs(:query_string).returns("")
     assert_equal "#{url_base}/auth/slack/callback", strategy.callback_url
   end
 
@@ -32,6 +33,7 @@ class CallbackUrlTest < StrategyTestCase
     url_base = "http://auth.request.com"
     @request.stubs(:url).returns("#{url_base}/page/path")
     strategy.stubs(:script_name).returns("") # as not to depend on Rack env
+    strategy.stubs(:query_string).returns("")
     assert_equal "#{url_base}/auth/slack/done", strategy.callback_url
   end
 end
